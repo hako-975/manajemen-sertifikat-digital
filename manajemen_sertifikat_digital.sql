@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Bulan Mei 2023 pada 07.53
+-- Waktu pembuatan: 07 Bulan Mei 2023 pada 08.08
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 8.2.0
 
@@ -50,7 +50,8 @@ INSERT INTO `sertifikat` (`id_sertifikat`, `judul`, `keterangan`, `tanggal_diter
 (6, 'Sertifikat Propesa UNPAM', 'Sertifikat UNPAM', '2020-08-29', '0000-00-00', '64573b919f018-certifikat propesa.pdf', 2),
 (7, 'Sertifikat Re-cloud Challenges Alibaba &amp; Codepolitan', 'Sertifikat Re-cloud Challenges Alibaba 2021', '2021-03-06', '2023-03-06', '64573bfd919ab-certificate re-cloud challenge from alibaba cloud and codepolitan.png', 2),
 (8, 'Andri Firman Saputra - Junior Network Administrator - sertifikat', 'Sertifikat VSGA', '2022-07-29', '2025-07-29', '64573c8149dd0-Andri Firman Saputra - Junior Network Administrator - sertifikat.pdf', 2),
-(9, 'Sertifikat Kompetensi Junior Web Developer', 'Sertifikat VSGA', '2021-12-23', '2024-12-23', '64573cc78cf8e-Sertifikat Kompetensi JWD.pdf', 2);
+(9, 'Sertifikat Kompetensi Junior Web Developer', 'Sertifikat VSGA', '2021-12-23', '2024-12-23', '64573cc78cf8e-Sertifikat Kompetensi JWD.pdf', 2),
+(10, 'Pemanfaatan Media Digital Untuk Meningkatkan Intelektual Generasi Muda Di Pesantren Nafidatunajah', 'Sertifikat PKM	', '2022-11-12', '0000-00-00', '64573e7f30007-WhatsApp Image 2023-05-07 at 12.14.48.jpeg', 1);
 
 -- --------------------------------------------------------
 
@@ -98,7 +99,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `sertifikat`
 --
 ALTER TABLE `sertifikat`
-  MODIFY `id_sertifikat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_sertifikat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`

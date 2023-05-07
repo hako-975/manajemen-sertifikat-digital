@@ -12,12 +12,14 @@ $sertifikat = mysqli_query($koneksi, "SELECT * FROM sertifikat INNER JOIN user O
 
 if (isset($_POST['btnCari'])) {
     $keyword = $_POST['keyword'];
-    $sertifikat = mysqli_query($koneksi, "SELECT * FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user WHERE sertifikat.id_user = '$id_user' AND judul LIKE '%$keyword%' 
+    $sertifikat = mysqli_query($koneksi, "SELECT * FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user WHERE sertifikat.id_user = '$id_user' 
+        AND user.id_user = '$id_user' 
+        AND (judul LIKE '%$keyword%' 
         OR keterangan LIKE '%$keyword%'
         OR tanggal_diterima LIKE '%$keyword%'
         OR tanggal_kedaluwarsa LIKE '%$keyword%'
-        OR file_sertifikat LIKE '%$keyword%' 
-    ORDER BY tanggal_diterima DESC");
+        OR file_sertifikat LIKE '%$keyword%')
+        ORDER BY tanggal_diterima DESC");
 
 }
 
