@@ -1,5 +1,8 @@
-body {
+* {
   font-family: 'Arial', sans-serif;
+}
+
+body {
   margin: 0;
   padding: 0;
 }
@@ -149,3 +152,15 @@ th, td {
   padding: 8px 15px;
 }
 
+.profile {
+  display: block;
+  background-color: #fff;
+  padding: 20px;
+  width: 100%;
+  margin: auto;
+  border-radius: 5px;
+}
+
+.profile th, td {
+  text-align: left;
+}
