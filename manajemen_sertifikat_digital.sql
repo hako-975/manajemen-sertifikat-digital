@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Bulan Mei 2023 pada 07.08
+-- Waktu pembuatan: 07 Bulan Mei 2023 pada 07.53
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 8.2.0
 
@@ -42,7 +42,15 @@ CREATE TABLE `sertifikat` (
 --
 
 INSERT INTO `sertifikat` (`id_sertifikat`, `judul`, `keterangan`, `tanggal_diterima`, `tanggal_kedaluwarsa`, `file_sertifikat`, `id_user`) VALUES
-(2, 'Sertifikat TOEFL 123', 'Sertifikat TOEFL Unpam123', '2023-05-08', '2025-04-07', '645723093ede7WORKSHOP 2021 - Andri Firman Saputra.pdf', 1);
+(1, 'Memahami Ajaran Agama dengan Pendekatan Sains', 'Sertifikat UNPAM', '2020-12-05', '0000-00-00', '645736cf45050-Tifanny Patriane Andari.pdf', 1),
+(2, 'TOEFL Prediction Test', 'Sertifikat UNPAM', '2023-05-02', '2025-05-02', '6457372757bd4-SERTIFIKAT_TOEFL_230313081072_TIFANNY PATRIANE ANDARI.PDF', 1),
+(3, 'TOEFL Prediction Test', 'Sertifikat UNPAM', '2023-04-06', '2025-04-06', '64573a8fbb1fb-SERTIFIKAT_TOEFL_230220080853_ANDRI FIRMAN SAPUTRA.pdf', 2),
+(4, 'GEMASTIK 14 - Aplikasi Permainan - The Most Inspiring Teams - Andri Firman Saputra', 'Sertifikat Finalis GEMASTIK 14', '2021-10-11', '0000-00-00', '64573afbd3d85-GEMASTIK 14 - Aplikasi Permainan - The Most Inspiring Teams - Andri Firman Saputra.pdf', 2),
+(5, 'Andri Firman Saputra - Desainer Multimedia Madya - sertifikat', 'Sertifikat VSGA', '2022-07-26', '2025-07-26', '64573b580ee7d-Andri Firman Saputra - Desainer Multimedia Madya - sertifikat.pdf', 2),
+(6, 'Sertifikat Propesa UNPAM', 'Sertifikat UNPAM', '2020-08-29', '0000-00-00', '64573b919f018-certifikat propesa.pdf', 2),
+(7, 'Sertifikat Re-cloud Challenges Alibaba &amp; Codepolitan', 'Sertifikat Re-cloud Challenges Alibaba 2021', '2021-03-06', '2023-03-06', '64573bfd919ab-certificate re-cloud challenge from alibaba cloud and codepolitan.png', 2),
+(8, 'Andri Firman Saputra - Junior Network Administrator - sertifikat', 'Sertifikat VSGA', '2022-07-29', '2025-07-29', '64573c8149dd0-Andri Firman Saputra - Junior Network Administrator - sertifikat.pdf', 2),
+(9, 'Sertifikat Kompetensi Junior Web Developer', 'Sertifikat VSGA', '2021-12-23', '2024-12-23', '64573cc78cf8e-Sertifikat Kompetensi JWD.pdf', 2);
 
 -- --------------------------------------------------------
 
@@ -62,7 +70,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `nama_lengkap`) VALUES
-(1, 'tifanny123', '$2y$10$RTYDcQFQM1v89BM49akHGuonhZr.FxeiYgP.HukeTBHWDRqPq22f.', 'Tifanny Patriane Andari');
+(1, 'tifanny123', '$2y$10$4Mn5vXdCWWv8qfMb7OCx6u8Vn6FNvgAmudo82GkGtySvV0j4RA0W2', 'Tifanny Patriane Andari'),
+(2, 'andri975', '$2y$10$8fi53wDgcGpmaXURt3gngOn3eEmpW6KKuteN4GuBmkyCr7Arwn.Km', 'Andri Firman Saputra');
 
 --
 -- Indexes for dumped tables
@@ -89,13 +98,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `sertifikat`
 --
 ALTER TABLE `sertifikat`
-  MODIFY `id_sertifikat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_sertifikat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

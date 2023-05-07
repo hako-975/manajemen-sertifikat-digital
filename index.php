@@ -8,7 +8,7 @@ if (!isset($_SESSION['id_user'])) {
 $id_user = $_SESSION['id_user'];
 $data_user = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM user WHERE id_user = '$id_user'"));
 
-$sertifikat = mysqli_query($koneksi, "SELECT * FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user WHERE sertifikat.id_user = '$id_user' ORDER BY tanggal_diterima DESC");
+$sertifikat = mysqli_query($koneksi, "SELECT * FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC");
 
 if (isset($_POST['btnCari'])) {
     $keyword = $_POST['keyword'];
@@ -72,9 +72,10 @@ if (isset($_POST['btnCari'])) {
         					<?php endif ?>
         				</td>
                         <td>
-                            <a href="file/<?= $data_sertifikat['file_sertifikat']; ?>"><?= $data_sertifikat['file_sertifikat']; ?></a>
+                            <a href="file/<?= $data_sertifikat['file_sertifikat']; ?>" target="_blank"><?= $data_sertifikat['file_sertifikat']; ?></a>
                         </td>
                         <td>
+                            <a href="file/<?= $data_sertifikat['file_sertifikat']; ?>" target="_blank" class="btn">Unduh</a>
                             <a href="ubah_sertifikat.php?id_sertifikat=<?= $data_sertifikat['id_sertifikat']; ?>" class="btn">Ubah</a>
                             <a href="hapus_sertifikat.php?id_sertifikat=<?= $data_sertifikat['id_sertifikat']; ?>" class="btn" onclick="return confirm('Apakah Anda yakin ingin menghapus Sertifikat <?= $data_sertifikat['judul'] ?>?')">Hapus</a>
                         </td>
