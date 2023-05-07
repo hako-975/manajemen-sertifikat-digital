@@ -1,0 +1,151 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.text-link {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.container {
+  margin: 100px auto;
+  max-width: 1200px;
+  padding: 0 15px;
+}
+
+.login-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-top: 5px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+.login-form h2 {
+  text-align: center;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.login-form input, .login-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #fff;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.btn {
+  text-align: center;
+  display: inline-block;
+  padding: 10px 15px;
+  border: none;
+  background-color: #19384B;
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  text-decoration: none;
+  margin: 5px;
+}
+
+.btn:hover {
+  background-color: #08273A;
+}
+
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  z-index: 9999;
+}
+
+.navbar-container {
+  max-width: 1500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px;
+  margin: 0 auto;
+}
+
+.navbar-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 550px) {
+  .navbar-title {
+    font-size: 12px;
+  }  
+}
+
+.navbar-title img {
+  margin-right: 10px;
+  width: 50px;
+  border-radius: 5px;
+}
+
+.navbar-title span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.navbar-button {
+  display: flex;
+  justify-content: flex-end;
+  text-align: center;
+  align-items: center;
+}
+
+.navbar-button a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 20px;
+  background-color: #19384B;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.logo-middle {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  border-radius: 5px;
+  margin-bottom: 25px;
+}
+
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: center;
+  padding: 8px;
+}
+
+.form-search input {
+  padding: 8px 15px;
+}
+
