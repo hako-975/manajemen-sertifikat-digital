@@ -96,10 +96,26 @@ body {
   align-items: center;
 }
 
-@media (max-width: 550px) {
+.checkbox {
+  margin-left: -30px; 
+  margin-top: -20px;
+}
+
+@media (max-width: 576px) {
   .navbar-title {
     font-size: 12px;
-  }  
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar-container {
+    padding: 10px 10px;
+  }
+
+  .checkbox {
+    margin-left: 20px; 
+    margin-top: -20px;
+  }
 }
 
 .navbar-title img {
@@ -149,7 +165,7 @@ th, td {
 }
 
 .form-search input {
-  padding: 8px 15px;
+  padding: 8px 35px;
 }
 
 .profile {
@@ -163,4 +179,19 @@ th, td {
 
 .profile th, td {
   text-align: left;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table-responsive table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-responsive th, .table-responsive td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
 }

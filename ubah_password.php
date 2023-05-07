@@ -78,7 +78,7 @@ if (isset($_POST['btnUbah'])) {
           <input type="password" id="password_baru" name="password_baru" required>
           <label for="verifikasi_password_baru">Ketik Ulang Password Baru:</label>
           <input type="password" id="verifikasi_password_baru" name="verifikasi_password_baru" required>
-          <button type="submit" name="btnUbah" class="btn">Ubah</button>
+          <button type="submit" name="btnUbah" class="btn">Kirim</button>
         </form>
     </div>
 

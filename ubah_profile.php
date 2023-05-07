@@ -66,7 +66,7 @@ if (isset($_POST['btnUbah'])) {
           <input type="text" id="username" name="username" required value="<?= $data_user['username']; ?>">
           <label for="nama_lengkap">Nama Lengkap:</label>
           <input type="text" id="nama_lengkap" name="nama_lengkap" required value="<?= $data_user['nama_lengkap']; ?>">
-          <button type="submit" name="btnUbah" class="btn">Ubah</button>
+          <button type="submit" name="btnUbah" class="btn">Kirim</button>
         </form>
     </div>
 

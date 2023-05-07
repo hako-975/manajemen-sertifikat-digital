@@ -87,10 +87,10 @@ if (isset($_POST['btnTambah'])) {
             <label for="tanggal_diterima">Tanggal Diterima:</label>
             <input type="date" id="tanggal_diterima" name="tanggal_diterima" required value="<?= date("Y-m-d"); ?>">
             <label for="kedaluwarsa">Dapat Kedaluwarsa?</label>
-            <input type="checkbox" name="kedaluwarsa" id="kedaluwarsa" style="margin-left: -30px; margin-top: -20px;">
+            <input type="checkbox" name="kedaluwarsa" id="kedaluwarsa" class="checkbox">
             <div style="display: none;" id="form_tanggal_kedaluwarsa">
                 <label for="tanggal_kedaluwarsa">Tanggal Kedaluwarsa:</label>
-                <input type="date" id="tanggal_kedaluwarsa" name="tanggal_kedaluwarsa">
+                <input type="date" id="tanggal_kedaluwarsa" name="tanggal_kedaluwarsa" value="<?= date("Y-m-d"); ?>">
             </div>
             <label for="file_sertifikat">File Sertifikat:</label>
             <input type="file" name="file_sertifikat" id="file_sertifikat" required>

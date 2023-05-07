@@ -36,55 +36,64 @@ if (isset($_POST['btnCari'])) {
 
     <div class="container">
         <h1 class="text-center">Daftar Sertifikat</h1>
-        <form method="post" class="form-search">
-            <input type="text" name="keyword" id="keyword" required value="<?= (isset($_POST['btnCari'])) ? $keyword : ''; ?>">
-            <button type="submit" name="btnCari" class="btn">Cari</button>
-            <?php if (isset($_POST['btnCari'])): ?>
-                <button type="button" onclick="return window.location.href='index.php'" class="btn">Reset</button>
-            <?php endif ?>
-        </form>
+        <div>
+            <div style="float: left;">
+                <form method="post" class="form-search">
+                    <input type="text" name="keyword" id="keyword" required value="<?= (isset($_POST['btnCari'])) ? $keyword : ''; ?>">
+                    <button type="submit" name="btnCari" class="btn">Cari</button>
+                    <?php if (isset($_POST['btnCari'])): ?>
+                        <button type="button" onclick="return window.location.href='index.php'" class="btn">Reset</button>
+                    <?php endif ?>
+                </form>
+            </div>
+            <div style="float: right;">
+                <a class="btn" href="tambah_sertifikat.php">Tambah Sertifikat</a>
+            </div>
+        </div>
         <?php if (isset($_POST['btnCari'])): ?>
             <h2>Cari: <?= $keyword; ?></h2>
         <?php endif ?>
-        <table border="1" cellpadding="10" cellspacing="0">
-        	<thead>
-        		<tr>
-        			<th>No</th>
-        			<th>Judul</th>
-        			<th>Keterangan</th>
-        			<th>Tanggal Diterima</th>
-        			<th>Tanggal Kedaluwarsa</th>
-        			<th>File Sertifikat</th>
-                    <th>Aksi</th>
-        		</tr>
-        	</thead>
-        	<tbody>
-        		<?php $i = 1; ?>
-        		<?php foreach ($sertifikat as $data_sertifikat): ?>
-        			<tr>
-        				<td><?= $i++; ?></td>
-        				<td><?= $data_sertifikat['judul']; ?></td>
-        				<td><?= strip_tags($data_sertifikat['keterangan']); ?></td>
-        				<td><?= date("d-m-Y", strtotime($data_sertifikat['tanggal_diterima'])); ?></td>
-        				<td>
-        					<?php if ($data_sertifikat['tanggal_kedaluwarsa'] == '0000-00-00'): ?>
-	        					Tidak ada Kedaluwarsa	
-        					<?php else: ?>
-        						<?= date("d-m-Y", strtotime($data_sertifikat['tanggal_kedaluwarsa'])); ?>
-        					<?php endif ?>
-        				</td>
-                        <td>
-                            <a href="file/<?= $data_sertifikat['file_sertifikat']; ?>" target="_blank"><?= $data_sertifikat['file_sertifikat']; ?></a>
-                        </td>
-                        <td>
-                            <a href="file/<?= $data_sertifikat['file_sertifikat']; ?>" target="_blank" class="btn">Unduh</a>
-                            <a href="ubah_sertifikat.php?id_sertifikat=<?= $data_sertifikat['id_sertifikat']; ?>" class="btn">Ubah</a>
-                            <a href="hapus_sertifikat.php?id_sertifikat=<?= $data_sertifikat['id_sertifikat']; ?>" class="btn" onclick="return confirm('Apakah Anda yakin ingin menghapus Sertifikat <?= $data_sertifikat['judul'] ?>?')">Hapus</a>
-                        </td>
-        			</tr>
-        		<?php endforeach ?>
-        	</tbody>
-        </table>
+        <div class="table-responsive" style="clear: both;">
+            <table border="1" cellpadding="10" cellspacing="0">
+            	<thead>
+            		<tr>
+            			<th>No</th>
+            			<th>Judul</th>
+            			<th>Keterangan</th>
+            			<th>Tanggal Diterima</th>
+            			<th>Tanggal Kedaluwarsa</th>
+            			<th>File Sertifikat</th>
+                        <th>Aksi</th>
+            		</tr>
+            	</thead>
+            	<tbody>
+            		<?php $i = 1; ?>
+            		<?php foreach ($sertifikat as $data_sertifikat): ?>
+            			<tr>
+            				<td><?= $i++; ?></td>
+            				<td><?= $data_sertifikat['judul']; ?></td>
+            				<td><?= strip_tags($data_sertifikat['keterangan']); ?></td>
+            				<td><?= date("d-m-Y", strtotime($data_sertifikat['tanggal_diterima'])); ?></td>
+            				<td>
+            					<?php if ($data_sertifikat['tanggal_kedaluwarsa'] == '0000-00-00'): ?>
+    	        					Tidak ada Kedaluwarsa	
+            					<?php else: ?>
+            						<?= date("d-m-Y", strtotime($data_sertifikat['tanggal_kedaluwarsa'])); ?>
+            					<?php endif ?>
+            				</td>
+                            <td>
+                                <a href="file/<?= $data_sertifikat['file_sertifikat']; ?>" target="_blank"><?= $data_sertifikat['file_sertifikat']; ?></a>
+                            </td>
+                            <td>
+                                <a href="file/<?= $data_sertifikat['file_sertifikat']; ?>" target="_blank" class="btn">Unduh</a>
+                                <a href="ubah_sertifikat.php?id_sertifikat=<?= $data_sertifikat['id_sertifikat']; ?>" class="btn">Ubah</a>
+                                <a href="hapus_sertifikat.php?id_sertifikat=<?= $data_sertifikat['id_sertifikat']; ?>" class="btn" onclick="return confirm('Apakah Anda yakin ingin menghapus Sertifikat <?= $data_sertifikat['judul'] ?>?')">Hapus</a>
+                            </td>
+            			</tr>
+            		<?php endforeach ?>
+            	</tbody>
+            </table>
+        </div>
     </div>
 
 </body>

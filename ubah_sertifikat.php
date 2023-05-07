@@ -115,13 +115,13 @@ if (isset($_POST['btnUbah'])) {
             <input type="date" id="tanggal_diterima" name="tanggal_diterima" required value="<?= date("Y-m-d", strtotime($data_sertifikat['tanggal_diterima'])); ?>">
             <label for="kedaluwarsa">Dapat Kedaluwarsa?</label>
             <?php if ($data_sertifikat['tanggal_kedaluwarsa'] == '0000-00-00'): ?>
-                <input type="checkbox" name="kedaluwarsa" id="kedaluwarsa" style="margin-left: -30px; margin-top: -20px;">
+                <input type="checkbox" name="kedaluwarsa" id="kedaluwarsa" class="checkbox">
                 <div style="display: none;" id="form_tanggal_kedaluwarsa">
                     <label for="tanggal_kedaluwarsa">Tanggal Kedaluwarsa:</label>
                     <input type="date" id="tanggal_kedaluwarsa" name="tanggal_kedaluwarsa" value="<?= date("Y-m-d", strtotime($data_sertifikat['tanggal_kedaluwarsa'])); ?>">
                 </div>
             <?php else: ?>
-                <input type="checkbox" name="kedaluwarsa" id="kedaluwarsa" style="margin-left: -30px; margin-top: -20px;" checked>
+                <input type="checkbox" name="kedaluwarsa" id="kedaluwarsa" class="checkbox" checked>
                 <div id="form_tanggal_kedaluwarsa">
                     <label for="tanggal_kedaluwarsa">Tanggal Kedaluwarsa:</label>
                     <input type="date" id="tanggal_kedaluwarsa" name="tanggal_kedaluwarsa" value="<?= date("Y-m-d", strtotime($data_sertifikat['tanggal_kedaluwarsa'])); ?>">
