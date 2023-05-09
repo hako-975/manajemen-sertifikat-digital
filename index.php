@@ -51,7 +51,10 @@ if (isset($_POST['btnCari'])) {
             </div>
         </div>
         <?php if (isset($_POST['btnCari'])): ?>
-            <h2>Cari: <?= $keyword; ?></h2>
+            <div style="clear: both;">
+                <h2>Cari: <?= $keyword; ?></h2>
+                <h2>Terdapat: <?= mysqli_num_rows($sertifikat); ?></h2>
+            </div>
         <?php endif ?>
         <div class="table-responsive" style="clear: both;">
             <table border="1" cellpadding="10" cellspacing="0">
