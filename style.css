@@ -101,6 +101,35 @@ body {
   margin-top: -20px;
 }
 
+
+
+.form-search {
+  float: left;
+  display: flex;
+  justify-content: center;
+}
+
+.form-search input {
+  height: 40px;
+  margin: 0;
+  padding: 10px;
+}
+
+.form-search button {
+  background-color: #19384B;
+  color: white;
+  font-size: 16px;
+  height: 40px;
+  margin: 0;
+  margin-right: 1px;
+  padding: 10px 20px;
+}
+
+.btn-tambah {
+  float: right;
+}
+
+
 @media (max-width: 576px) {
   .navbar-title {
     font-size: 12px;
@@ -108,6 +137,15 @@ body {
 }
 
 @media (max-width: 992px) {
+  .form-search {
+    float: none;
+  }
+  .btn-tambah {
+    float: none;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
   .navbar-container {
     padding: 10px 10px;
   }
@@ -164,9 +202,6 @@ th, td {
   padding: 8px;
 }
 
-.form-search input {
-  padding: 8px 35px;
-}
 
 .profile {
   display: block;
@@ -194,4 +229,8 @@ th, td {
   padding: 8px;
   text-align: left;
   border: 1px solid #ddd;
+}
+
+.clear-both {
+  clear: both;
 }

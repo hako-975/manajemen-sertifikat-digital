@@ -36,27 +36,23 @@ if (isset($_POST['btnCari'])) {
 
     <div class="container">
         <h1 class="text-center">Daftar Sertifikat</h1>
-        <div>
-            <div style="float: left;">
-                <form method="post" class="form-search">
-                    <input type="text" name="keyword" id="keyword" required value="<?= (isset($_POST['btnCari'])) ? $keyword : ''; ?>">
-                    <button type="submit" name="btnCari" class="btn">Cari</button>
-                    <?php if (isset($_POST['btnCari'])): ?>
-                        <button type="button" onclick="return window.location.href='index.php'" class="btn">Reset</button>
-                    <?php endif ?>
-                </form>
-            </div>
-            <div style="float: right;">
-                <a class="btn" href="tambah_sertifikat.php">Tambah Sertifikat</a>
-            </div>
+        <form method="post" class="form-search">
+            <input type="text" name="keyword" id="keyword" required value="<?= (isset($_POST['btnCari'])) ? $keyword : ''; ?>">
+            <button type="submit" name="btnCari" class="btn">Cari</button>
+            <?php if (isset($_POST['btnCari'])): ?>
+                <button type="button" onclick="return window.location.href='index.php'" class="btn">Reset</button>
+            <?php endif ?>
+        </form>
+        <div class="btn-tambah">
+            <a class="btn" href="tambah_sertifikat.php">Tambah Sertifikat</a>
         </div>
         <?php if (isset($_POST['btnCari'])): ?>
-            <div style="clear: both;">
+            <div class="clear-both">
                 <h2>Cari: <?= $keyword; ?></h2>
                 <h2>Terdapat: <?= mysqli_num_rows($sertifikat); ?></h2>
             </div>
         <?php endif ?>
-        <div class="table-responsive" style="clear: both;">
+        <div class="table-responsive clear-both">
             <table border="1" cellpadding="10" cellspacing="0">
             	<thead>
             		<tr>
