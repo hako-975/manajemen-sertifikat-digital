@@ -61,6 +61,7 @@ if (isset($_POST['btnCari'])) {
             			<th>Keterangan</th>
             			<th>Tanggal Diterima</th>
             			<th>Tanggal Kedaluwarsa</th>
+                        <th>Jangka Waktu</th>
             			<th>File Sertifikat</th>
                         <th>Aksi</th>
             		</tr>
@@ -80,6 +81,19 @@ if (isset($_POST['btnCari'])) {
             						<?= date("d-m-Y", strtotime($data_sertifikat['tanggal_kedaluwarsa'])); ?>
             					<?php endif ?>
             				</td>
+                            <td>
+                                <?php if ($data_sertifikat['tanggal_kedaluwarsa'] == '0000-00-00'): ?>
+                                    Tidak ada Kedaluwarsa   
+                                <?php else: ?>
+                                    <?php 
+                                        $tanggal_diterima = new DateTime($data_sertifikat['tanggal_diterima']);
+                                        $tanggal_kedaluwarsa = new DateTime($data_sertifikat['tanggal_kedaluwarsa']);
+                                        $difference = $tanggal_diterima->diff($tanggal_kedaluwarsa);
+
+                                        echo $difference->format('%a Hari');
+                                    ?>
+                                <?php endif ?>
+                            </td>
                             <td>
                                 <a href="file/<?= $data_sertifikat['file_sertifikat']; ?>" target="_blank"><?= $data_sertifikat['file_sertifikat']; ?></a>
                             </td>
