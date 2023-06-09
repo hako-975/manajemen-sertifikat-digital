@@ -7,30 +7,55 @@ if (!isset($_SESSION['id_user'])) {
 
 $id_user = $_SESSION['id_user'];
 $data_user = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM user WHERE id_user = '$id_user'"));
+if ($data_user['username'] == 'admin') {
+    $sertifikat = mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat ORDER BY judul ASC");
 
-$sertifikat = mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC");
+    $total_sertifikat = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, count(sertifikat.id_sertifikat) as total_sertifikat FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat ORDER BY judul ASC"))['total_sertifikat'];
 
-$total_sertifikat = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, count(sertifikat.id_sertifikat) as total_sertifikat FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC"))['total_sertifikat'];
+    $total_nilai = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, sum(penilaian.nilai) as total_nilai FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat ORDER BY judul ASC"))['total_nilai'];
 
-$total_nilai = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, sum(penilaian.nilai) as total_nilai FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC"))['total_nilai'];
+    $nilai_terendah = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, min(penilaian.nilai) as nilai_terendah FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat ORDER BY judul ASC"))['nilai_terendah'];
 
-$nilai_terendah = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, min(penilaian.nilai) as nilai_terendah FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC"))['nilai_terendah'];
+    $nilai_tertinggi = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, max(penilaian.nilai) as nilai_tertinggi FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat ORDER BY judul ASC"))['nilai_tertinggi'];
 
-$nilai_tertinggi = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, max(penilaian.nilai) as nilai_tertinggi FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC"))['nilai_tertinggi'];
+    $rata_rata = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, avg(penilaian.nilai) as rata_rata FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat ORDER BY judul ASC"))['rata_rata'];
 
-$rata_rata = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, avg(penilaian.nilai) as rata_rata FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC"))['rata_rata'];
+    if (isset($_POST['btnCari'])) {
+        $keyword = $_POST['keyword'];
+        $sertifikat = mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE judul LIKE '%$keyword%' 
+            OR keterangan LIKE '%$keyword%'
+            OR tanggal_diterima LIKE '%$keyword%'
+            OR tanggal_kedaluwarsa LIKE '%$keyword%'
+            OR nilai LIKE '%$keyword%'
+            OR file_sertifikat LIKE '%$keyword%'
+            ORDER BY tanggal_diterima DESC");
+    }
+} else {
+    $sertifikat = mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC");
 
-if (isset($_POST['btnCari'])) {
-    $keyword = $_POST['keyword'];
-    $sertifikat = mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' 
-        AND user.id_user = '$id_user' 
-        AND (judul LIKE '%$keyword%' 
-        OR keterangan LIKE '%$keyword%'
-        OR tanggal_diterima LIKE '%$keyword%'
-        OR tanggal_kedaluwarsa LIKE '%$keyword%'
-        OR nilai LIKE '%$keyword%'
-        OR file_sertifikat LIKE '%$keyword%')
-        ORDER BY tanggal_diterima DESC");
+    $total_sertifikat = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, count(sertifikat.id_sertifikat) as total_sertifikat FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC"))['total_sertifikat'];
+
+    $total_nilai = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, sum(penilaian.nilai) as total_nilai FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC"))['total_nilai'];
+
+    $nilai_terendah = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, min(penilaian.nilai) as nilai_terendah FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC"))['nilai_terendah'];
+
+    $nilai_tertinggi = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, max(penilaian.nilai) as nilai_tertinggi FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC"))['nilai_tertinggi'];
+
+    $rata_rata = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, avg(penilaian.nilai) as rata_rata FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC"))['rata_rata'];
+
+    if (isset($_POST['btnCari'])) {
+        $keyword = $_POST['keyword'];
+        $sertifikat = mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' 
+            AND user.id_user = '$id_user' 
+            AND (judul LIKE '%$keyword%' 
+            OR keterangan LIKE '%$keyword%'
+            OR tanggal_diterima LIKE '%$keyword%'
+            OR tanggal_kedaluwarsa LIKE '%$keyword%'
+            OR nilai LIKE '%$keyword%'
+            OR file_sertifikat LIKE '%$keyword%')
+            ORDER BY tanggal_diterima DESC");
+    }
+
 }
 
 ?>
@@ -46,6 +71,9 @@ if (isset($_POST['btnCari'])) {
 
     <div class="container">
         <h1 class="text-center">Daftar Sertifikat</h1>
+        <?php if ($data_user['username'] == 'admin'): ?>
+            <h2 class="text-center">Selamat Datang Administrator</h2>
+        <?php endif ?>
         <div class="row">
             <div class="col">
                 <div class="card">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: sql311.infinityfree.com
--- Generation Time: Jun 09, 2023 at 03:38 PM
+-- Generation Time: Jun 09, 2023 at 03:40 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.2.22
 
@@ -66,9 +66,9 @@ CREATE TABLE `sertifikat` (
 --
 
 INSERT INTO `sertifikat` (`id_sertifikat`, `judul`, `keterangan`, `tanggal_diterima`, `tanggal_kedaluwarsa`, `file_sertifikat`, `id_user`) VALUES
-(1, 'Memahami Ajaran Agama dengan Pendekatan Sains', 'Sertifikat UNPAM', '2020-05-12', '0000-00-00', '64837bf420934-Tifanny Patriane Andari.pdf', 1),
-(2, 'TOEFL Prediction Test', 'Sertifikat UNPAM', '2023-02-05', '2025-02-05', '64837c3a26a16-SERTIFIKAT_TOEFL_230313081072_TIFANNY PATRIANE ANDARI.PDF', 1),
-(3, 'Pemanfaatan Media Digital Untuk Meningkatkan Intelektual Generasi Muda Di Pesantren Nafidatunajah', 'Sertifikat PKM', '2022-12-11', '0000-00-00', '64837c994962b-WhatsApp Image 2023-05-07 at 12.14.48.jpeg', 1),
+(1, 'Memahami Ajaran Agama dengan Pendekatan Sains', 'Sertifikat UNPAM', '2020-05-12', '0000-00-00', '64837bf420934-Tifanny Patriane Andari.pdf', 3),
+(2, 'TOEFL Prediction Test', 'Sertifikat UNPAM', '2023-02-05', '2025-02-05', '64837c3a26a16-SERTIFIKAT_TOEFL_230313081072_TIFANNY PATRIANE ANDARI.PDF', 3),
+(3, 'Pemanfaatan Media Digital Untuk Meningkatkan Intelektual Generasi Muda Di Pesantren Nafidatunajah', 'Sertifikat PKM', '2022-12-11', '0000-00-00', '64837c994962b-WhatsApp Image 2023-05-07 at 12.14.48.jpeg', 3),
 (4, 'GEMASTIK 14 - Aplikasi Permainan - The Most Inspiring Teams - Andri Firman Saputra', 'Sertifikat Finalis GEMASTIK 14', '2021-11-10', '0000-00-00', '64837f1d5e4d4-GEMASTIK 14 - Aplikasi Permainan - The Most Inspiring Teams - Andri Firman Saputra.pdf', 2),
 (5, 'TOEFL Prediction Test', 'Sertifikat UNPAM', '2023-06-04', '2025-06-04', '64837f8b94cca-SERTIFIKAT_TOEFL_230220080853_ANDRI FIRMAN SAPUTRA.pdf', 2);
 
@@ -90,8 +90,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `nama_lengkap`) VALUES
-(1, 'tifanny123', '$2y$10$DKRBz2iuLDrHKEW1N0XZk.R2iZJ92kUoF0Ca00tAoyucImGTfFMvi', 'Tifanny Patriane Andari'),
-(2, 'andri123', '$2y$10$dbrxmJeuKv/ohvIEUTiAxuY.K6lQaSdx6VLp9l.eISODcYPT35cae', 'Andri Firman Saputra');
+(1, 'admin', '$2y$10$IM7RIy5/LVRc4TQY200Ka.7ZVC5itU6aA23wsBEJqpFu4X7re9LKO', 'Administrator'),
+(2, 'andri123', '$2y$10$dbrxmJeuKv/ohvIEUTiAxuY.K6lQaSdx6VLp9l.eISODcYPT35cae', 'Andri Firman Saputra'),
+(3, 'tifanny123', '$2y$10$DKRBz2iuLDrHKEW1N0XZk.R2iZJ92kUoF0Ca00tAoyucImGTfFMvi', 'Tifanny Patriane Andari');
 
 --
 -- Indexes for dumped tables
@@ -137,7 +138,7 @@ ALTER TABLE `sertifikat`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
