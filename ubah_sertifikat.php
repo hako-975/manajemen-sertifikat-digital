@@ -39,8 +39,10 @@ if (isset($_POST['btnUbah'])) {
     $keterangan = nl2br($_POST['keterangan']);
     $tanggal_diterima = htmlspecialchars($_POST['tanggal_diterima']);
     $nilai = htmlspecialchars($_POST['nilai']);
-    if (isset($_POST['tanggal_kedaluwarsa'])) {
-        $tanggal_kedaluwarsa = htmlspecialchars($_POST['tanggal_kedaluwarsa']);
+    if (isset($_POST['kedaluwarsa'])) {
+        if ($_POST['kedaluwarsa'] == "on") {
+            $tanggal_kedaluwarsa = htmlspecialchars($_POST['tanggal_kedaluwarsa']);
+        }
     } else {
         $tanggal_kedaluwarsa = null;
     }
