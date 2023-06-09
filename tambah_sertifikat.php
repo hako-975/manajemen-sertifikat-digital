@@ -96,7 +96,7 @@ if (isset($_POST['btnTambah'])) {
             <input type="checkbox" name="kedaluwarsa" id="kedaluwarsa" class="checkbox">
             <div style="display: none;" id="form_tanggal_kedaluwarsa">
                 <label for="tanggal_kedaluwarsa">Tanggal Kedaluwarsa:</label>
-                <input type="date" id="tanggal_kedaluwarsa" name="tanggal_kedaluwarsa" value="<?= date("Y-m-d"); ?>">
+                <input type="date" id="tanggal_kedaluwarsa" name="tanggal_kedaluwarsa">
             </div>
             <label for="file_sertifikat">File Sertifikat:</label>
             <input type="file" name="file_sertifikat" id="file_sertifikat" required>
