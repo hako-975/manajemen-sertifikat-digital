@@ -9,7 +9,7 @@ $id_user = $_SESSION['id_user'];
 $data_user = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM user WHERE id_user = '$id_user'"));
 
 $id_sertifikat = $_GET['id_sertifikat'];
-$sertifikat = mysqli_query($koneksi, "SELECT * FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user WHERE sertifikat.id_sertifikat = '$id_sertifikat' && sertifikat.id_user = '$id_user'");
+$sertifikat = mysqli_query($koneksi, "SELECT * FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_sertifikat = '$id_sertifikat' && sertifikat.id_user = '$id_user'");
 $data_sertifikat = mysqli_fetch_assoc($sertifikat);
 
 $sertifikatKu = false;
@@ -38,6 +38,7 @@ if (isset($_POST['btnUbah'])) {
     $judul = htmlspecialchars($_POST['judul']);
     $keterangan = nl2br($_POST['keterangan']);
     $tanggal_diterima = htmlspecialchars($_POST['tanggal_diterima']);
+    $nilai = htmlspecialchars($_POST['nilai']);
     if (isset($_POST['tanggal_kedaluwarsa'])) {
         $tanggal_kedaluwarsa = htmlspecialchars($_POST['tanggal_kedaluwarsa']);
     } else {
@@ -74,6 +75,8 @@ if (isset($_POST['btnUbah'])) {
     $ubah_sertifikat = mysqli_query($koneksi, "UPDATE sertifikat SET judul = '$judul', keterangan = '$keterangan', tanggal_diterima = '$tanggal_diterima', tanggal_kedaluwarsa = '$tanggal_kedaluwarsa', file_sertifikat = '$file_sertifikat' WHERE id_sertifikat = '$id_sertifikat' && id_user = '$id_user'");
 
     if ($ubah_sertifikat) {
+        $ubah_nilai = mysqli_query($koneksi, "UPDATE penilaian SET nilai = '$nilai' WHERE id_sertifikat = '$id_sertifikat'");
+
         echo "
             <script>
                 alert('Sertifikat berhasil diubah!')
@@ -129,6 +132,8 @@ if (isset($_POST['btnUbah'])) {
             <?php endif ?>
             <label for="file_sertifikat">File Sertifikat: <br> (Upload File baru jika ingin mengubah file)</label>
             <input type="file" name="file_sertifikat" id="file_sertifikat">
+            <label for="nilai">Nilai:</label>
+            <input type="number" id="nilai" name="nilai" value="<?= $data_sertifikat['nilai']; ?>" required>
             <button type="submit" name="btnUbah" class="btn">Kirim</button>
         </form>
     </div>

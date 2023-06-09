@@ -8,19 +8,29 @@ if (!isset($_SESSION['id_user'])) {
 $id_user = $_SESSION['id_user'];
 $data_user = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM user WHERE id_user = '$id_user'"));
 
-$sertifikat = mysqli_query($koneksi, "SELECT * FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC");
+$sertifikat = mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC");
+
+$total_sertifikat = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, count(sertifikat.id_sertifikat) as total_sertifikat FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC"))['total_sertifikat'];
+
+$total_nilai = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, sum(penilaian.nilai) as total_nilai FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC"))['total_nilai'];
+
+$nilai_terendah = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, min(penilaian.nilai) as nilai_terendah FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC"))['nilai_terendah'];
+
+$nilai_tertinggi = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, max(penilaian.nilai) as nilai_tertinggi FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC"))['nilai_tertinggi'];
+
+$rata_rata = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat, avg(penilaian.nilai) as rata_rata FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' ORDER BY judul ASC"))['rata_rata'];
 
 if (isset($_POST['btnCari'])) {
     $keyword = $_POST['keyword'];
-    $sertifikat = mysqli_query($koneksi, "SELECT * FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user WHERE sertifikat.id_user = '$id_user' 
+    $sertifikat = mysqli_query($koneksi, "SELECT *, sertifikat.id_sertifikat AS sertifikat_id_sertifikat FROM sertifikat INNER JOIN user ON sertifikat.id_user = user.id_user LEFT JOIN penilaian ON sertifikat.id_sertifikat = penilaian.id_sertifikat WHERE sertifikat.id_user = '$id_user' 
         AND user.id_user = '$id_user' 
         AND (judul LIKE '%$keyword%' 
         OR keterangan LIKE '%$keyword%'
         OR tanggal_diterima LIKE '%$keyword%'
         OR tanggal_kedaluwarsa LIKE '%$keyword%'
+        OR nilai LIKE '%$keyword%'
         OR file_sertifikat LIKE '%$keyword%')
         ORDER BY tanggal_diterima DESC");
-
 }
 
 ?>
@@ -36,6 +46,33 @@ if (isset($_POST['btnCari'])) {
 
     <div class="container">
         <h1 class="text-center">Daftar Sertifikat</h1>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <h4>Total Sertifikat: <?= str_replace(",", ".", number_format($total_sertifikat)); ?></h4>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <h4>Total Nilai: <?= str_replace(",", ".", number_format($total_nilai)); ?></h4>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <h4>Nilai Terendah: <?= str_replace(",", ".", number_format($nilai_terendah)); ?></h4>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <h4>Nilai Tertinggi: <?= str_replace(",", ".", number_format($nilai_tertinggi)); ?></h4>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <h4>Rata-rata: <?= str_replace(",", ".", number_format($rata_rata)); ?></h4>
+                </div>
+            </div>
+        </div>
         <form method="post" class="form-search">
             <input type="text" name="keyword" id="keyword" required value="<?= (isset($_POST['btnCari'])) ? $keyword : ''; ?>">
             <button type="submit" name="btnCari" class="btn">Cari</button>
@@ -62,7 +99,8 @@ if (isset($_POST['btnCari'])) {
             			<th>Tanggal Diterima</th>
             			<th>Tanggal Kedaluwarsa</th>
                         <th>Jangka Waktu</th>
-            			<th>File Sertifikat</th>
+                        <th>File Sertifikat</th>
+            			<th>Nilai</th>
                         <th>Aksi</th>
             		</tr>
             	</thead>
@@ -98,9 +136,16 @@ if (isset($_POST['btnCari'])) {
                                 <a href="file/<?= $data_sertifikat['file_sertifikat']; ?>" target="_blank"><?= $data_sertifikat['file_sertifikat']; ?></a>
                             </td>
                             <td>
+                                <?php if ($data_sertifikat['nilai']): ?>
+                                    <?= $data_sertifikat['nilai']; ?>
+                                <?php else: ?>
+                                    -
+                                <?php endif ?>
+                            </td>
+                            <td>
                                 <a href="file/<?= $data_sertifikat['file_sertifikat']; ?>" target="_blank" class="btn">Unduh</a>
-                                <a href="ubah_sertifikat.php?id_sertifikat=<?= $data_sertifikat['id_sertifikat']; ?>" class="btn">Ubah</a>
-                                <a href="hapus_sertifikat.php?id_sertifikat=<?= $data_sertifikat['id_sertifikat']; ?>" class="btn" onclick="return confirm('Apakah Anda yakin ingin menghapus Sertifikat <?= $data_sertifikat['judul'] ?>?')">Hapus</a>
+                                <a href="ubah_sertifikat.php?id_sertifikat=<?= $data_sertifikat['sertifikat_id_sertifikat']; ?>" class="btn">Ubah</a>
+                                <a href="hapus_sertifikat.php?id_sertifikat=<?= $data_sertifikat['sertifikat_id_sertifikat']; ?>" class="btn" onclick="return confirm('Apakah Anda yakin ingin menghapus Sertifikat <?= $data_sertifikat['judul'] ?>?')">Hapus</a>
                             </td>
             			</tr>
             		<?php endforeach ?>

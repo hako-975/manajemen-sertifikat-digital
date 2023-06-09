@@ -234,3 +234,34 @@ th, td {
 .clear-both {
   clear: both;
 }
+
+
+.card {
+  background-color: #19384B;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 30px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.col {
+  margin-right: 20px;
+  margin-bottom: 10px;
+  flex: 1 0 0%;
+}
+
+.col:last-child {
+  margin-right: 0;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}

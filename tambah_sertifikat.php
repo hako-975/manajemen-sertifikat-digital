@@ -12,6 +12,8 @@ if (isset($_POST['btnTambah'])) {
     $judul = htmlspecialchars($_POST['judul']);
     $keterangan = nl2br($_POST['keterangan']);
     $tanggal_diterima = htmlspecialchars($_POST['tanggal_diterima']);
+    $nilai = htmlspecialchars($_POST['nilai']);
+
     if (isset($_POST['tanggal_kedaluwarsa'])) {
         $tanggal_kedaluwarsa = htmlspecialchars($_POST['tanggal_kedaluwarsa']);
     } else {
@@ -48,6 +50,10 @@ if (isset($_POST['btnTambah'])) {
     $tambah_sertifikat = mysqli_query($koneksi, "INSERT INTO sertifikat VALUES ('', '$judul', '$keterangan', '$tanggal_diterima', '$tanggal_kedaluwarsa', '$file_sertifikat', '$id_user')");
 
     if ($tambah_sertifikat) {
+        $id_sertifikat = mysqli_insert_id($koneksi);
+
+        $tambah_nilai = mysqli_query($koneksi, "INSERT INTO penilaian VALUES ('', '$id_sertifikat', '$nilai')");
+
         echo "
             <script>
                 alert('Sertifikat berhasil ditambahkan!')
@@ -94,6 +100,8 @@ if (isset($_POST['btnTambah'])) {
             </div>
             <label for="file_sertifikat">File Sertifikat:</label>
             <input type="file" name="file_sertifikat" id="file_sertifikat" required>
+            <label for="nilai">Nilai:</label>
+            <input type="number" id="nilai" name="nilai" required>
             <button type="submit" name="btnTambah" class="btn">Kirim</button>
         </form>
     </div>
