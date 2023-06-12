@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: sql311.infinityfree.com
--- Generation Time: Jun 09, 2023 at 03:40 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.2.22
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 12 Jun 2023 pada 03.51
+-- Versi server: 10.4.27-MariaDB
+-- Versi PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,23 +18,23 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `epiz_34153683_manajemen_sertifikat_digital`
+-- Database: `manajemen_sertifikat_digital`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `penilaian`
+-- Struktur dari tabel `penilaian`
 --
 
 CREATE TABLE `penilaian` (
   `id_penilaian` int(11) NOT NULL,
   `id_sertifikat` int(11) NOT NULL,
   `nilai` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `penilaian`
+-- Dumping data untuk tabel `penilaian`
 --
 
 INSERT INTO `penilaian` (`id_penilaian`, `id_sertifikat`, `nilai`) VALUES
@@ -48,7 +47,7 @@ INSERT INTO `penilaian` (`id_penilaian`, `id_sertifikat`, `nilai`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sertifikat`
+-- Struktur dari tabel `sertifikat`
 --
 
 CREATE TABLE `sertifikat` (
@@ -59,10 +58,10 @@ CREATE TABLE `sertifikat` (
   `tanggal_kedaluwarsa` date DEFAULT NULL,
   `file_sertifikat` text NOT NULL,
   `id_user` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `sertifikat`
+-- Dumping data untuk tabel `sertifikat`
 --
 
 INSERT INTO `sertifikat` (`id_sertifikat`, `judul`, `keterangan`, `tanggal_diterima`, `tanggal_kedaluwarsa`, `file_sertifikat`, `id_user`) VALUES
@@ -75,7 +74,7 @@ INSERT INTO `sertifikat` (`id_sertifikat`, `judul`, `keterangan`, `tanggal_diter
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -83,10 +82,10 @@ CREATE TABLE `user` (
   `username` varchar(20) NOT NULL,
   `password` varchar(255) NOT NULL,
   `nama_lengkap` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `nama_lengkap`) VALUES
@@ -99,59 +98,59 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `nama_lengkap`) VALUES
 --
 
 --
--- Indexes for table `penilaian`
+-- Indeks untuk tabel `penilaian`
 --
 ALTER TABLE `penilaian`
   ADD PRIMARY KEY (`id_penilaian`),
   ADD KEY `id_sertifikat` (`id_sertifikat`);
 
 --
--- Indexes for table `sertifikat`
+-- Indeks untuk tabel `sertifikat`
 --
 ALTER TABLE `sertifikat`
   ADD PRIMARY KEY (`id_sertifikat`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `penilaian`
+-- AUTO_INCREMENT untuk tabel `penilaian`
 --
 ALTER TABLE `penilaian`
   MODIFY `id_penilaian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `sertifikat`
+-- AUTO_INCREMENT untuk tabel `sertifikat`
 --
 ALTER TABLE `sertifikat`
   MODIFY `id_sertifikat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `penilaian`
+-- Ketidakleluasaan untuk tabel `penilaian`
 --
 ALTER TABLE `penilaian`
   ADD CONSTRAINT `penilaian_ibfk_1` FOREIGN KEY (`id_sertifikat`) REFERENCES `sertifikat` (`id_sertifikat`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `sertifikat`
+-- Ketidakleluasaan untuk tabel `sertifikat`
 --
 ALTER TABLE `sertifikat`
   ADD CONSTRAINT `sertifikat_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
